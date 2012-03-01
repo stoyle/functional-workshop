@@ -14,6 +14,7 @@
     <modules>
         <module>java-functional</module>
         <module>clojure-functional</module>
+        <module>scala-functional</module>
     </modules>
 
 </project>
