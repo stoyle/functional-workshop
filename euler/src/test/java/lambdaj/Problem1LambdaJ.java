@@ -23,11 +23,6 @@ public class Problem1LambdaJ {
 		
 	};
 
-	@BeforeClass
-	public static void beforeClass() {
-		Lambda.enableJitting(true);
-	}
-	
 	@Test
 	public void find_sum_of_all_multiples_of_3_and_5_below_10() {
 		Iterable<Long> numbers = range(1, 10);
