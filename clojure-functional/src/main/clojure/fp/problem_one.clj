@@ -8,5 +8,10 @@
   (reductions +
     (filter multiples-of-3-or-5 coll)))
 
-(defn euler-one-sum-beneath [limit]
- (last (sum-modof-coll (range limit))))
+(defn euler-one-sum-beneath-lazy [limit]
+ (last
+   (sum-modof-coll (range 1 limit))))
+
+(defn euler-one-sum-beneath-eager [limit]
+  (reduce +
+    (filter multiples-of-3-or-5 (range 1 limit))))
