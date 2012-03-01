@@ -4,13 +4,11 @@
   <groupId>no.knowit</groupId>
   <artifactId>clojure-functional</artifactId>
   <version>0.1-SNAPSHOT</version>
-  <name>Test demo</name>
+  <name>Clojure functional workshop</name>
   <packaging>clojure</packaging>
-
   <build>
-        <sourceDirectory>src/main/clojure</sourceDirectory>
-        <testSourceDirectory>src/test/clojure</testSourceDirectory>
-
+    <sourceDirectory>src/main/clojure</sourceDirectory>
+    <testSourceDirectory>src/test/clojure</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>com.theoryinpractise</groupId>

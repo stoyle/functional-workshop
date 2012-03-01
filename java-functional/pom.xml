@@ -6,7 +6,7 @@
     <groupId>no.knowit</groupId>
     <artifactId>java-functional</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <name>Test demo</name>
+    <name>Java functional workshop</name>
 
     <dependencies>
         <dependency>
