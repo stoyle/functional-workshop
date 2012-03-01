@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <groupId>no.knowit</groupId>
-    <artifactId>functiona-workshop</artifactId>
+    <artifactId>functional-workshop</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <modelVersion>4.0.0</modelVersion>
@@ -13,10 +13,7 @@
 
     <modules>
         <module>java-functional</module>
-<!--
-        <module>kategori</module>
-        <module>avvik</module>
-        <module>statistikk-mottak</module> -->
+        <module>clojure-functional</module>
     </modules>
 
 </project>
