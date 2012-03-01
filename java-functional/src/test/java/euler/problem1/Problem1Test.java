@@ -13,39 +13,34 @@ public class Problem1Test {
 
 	@Test
 	public void testPlainJava() {
-		testSumMultiplesOf3and5Below10(plainJava);
-
-		long largeSum = plainJava.sumMultiplesOf3and5Below(100000000);
-		assertEquals("Wrong sum", 2333333316666668L, largeSum);
+		testSumMultiplesOf3and5(plainJava, 1000, 233168L);
+		// testSumMultiplesOf3and5(plainJava, 100000000, 2333333316666668L);
 	}
 
 	@Test
 	public void testLambdaJ() {
-		testSumMultiplesOf3and5Below10(lambdaJ);
-
-		long largeSum = lambdaJ.sumMultiplesOf3and5Below(1000000);
-		assertEquals("Wrong sum", 233333166668L, largeSum);
+		testSumMultiplesOf3and5(lambdaJ, 1000, 233168L);
+		// testSumMultiplesOf3and5(lambdaJ, 1000000, 233333166668L);
 	}
 
 	@Test
 	public void testGuava() {
-		testSumMultiplesOf3and5Below10(guava);
-
-		long largeSum = guava.sumMultiplesOf3and5Below(1000000);
-		assertEquals("Wrong sum", 233333166668L, largeSum);
+		testSumMultiplesOf3and5(guava, 1000, 233168L);
+		// testSumMultiplesOf3and5(guava, 1000000, 233333166668L);
 	}
 	
 	@Test
 	public void testFunctionalJ() {
-		testSumMultiplesOf3and5Below10(functionalJava);
-
-		long largeSum = functionalJava.sumMultiplesOf3and5Below(10000);
-		assertEquals("Wrong sum", 23331668L, largeSum);
+		testSumMultiplesOf3and5(functionalJava, 1000, 233168L);
+		// testSumMultiplesOf3and5(functionalJava, 10000, 23331668L);
 	}
 	
-	private void testSumMultiplesOf3and5Below10(Problem1 classUnderTest) {
+	private void testSumMultiplesOf3and5(Problem1 classUnderTest, int limit, long expected) {
 		long sum = classUnderTest.sumMultiplesOf3and5Below(10);
 		assertEquals("Wrong sum", 23L, sum);
+
+		long largeSum = classUnderTest.sumMultiplesOf3and5Below(limit);
+		assertEquals("Wrong sum", expected, largeSum);
 	}
 
 }
