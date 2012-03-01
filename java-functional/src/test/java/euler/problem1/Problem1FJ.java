@@ -1,4 +1,4 @@
-package functionaljava;
+package euler.problem1;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package plainjava;
+package euler.problem1;
 
 import static org.junit.Assert.*;
 

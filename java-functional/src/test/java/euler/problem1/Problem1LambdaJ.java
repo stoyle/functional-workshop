@@ -1,4 +1,4 @@
-package lambdaj;
+package euler.problem1;
 
 import static ch.lambdaj.Lambda.*;
 import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package guava;
+package euler.problem1;
 
 import static org.junit.Assert.*;
 import static com.google.common.collect.Iterables.*;
