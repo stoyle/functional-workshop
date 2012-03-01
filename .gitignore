@@ -27,3 +27,5 @@ boot/
 /.cache
 lib
 .lein*
+*.jar
+.cache
