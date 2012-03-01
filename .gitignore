@@ -25,3 +25,5 @@ boot/
 /etarget
 /eclipseoutput
 /.cache
+lib
+.lein*
