@@ -8,7 +8,9 @@
 
 (deftest very-basic-types
   (is (= 1 1))
+  ;; Lots of things are truthy, which is the simplest?
   (is (true? true))
+  ;; Now what is the concatenation of those Characters
   (is (= (str \a \b \c) "abc"))
   ;; Use vector literal
   (is (= '(1 2 3) [1 2 3]))
@@ -21,13 +23,16 @@
 
 
 (deftest use-conjoin
+  ;; conjoin is a special function that works with most datastructures.
+  ;; It nows where the right place is to append an element.
+  ;; Use (doc conj) for info
+  ;; Oh, and by the way. 'are' creates a template (using a macro),
+  ;; for alle the following test form, which need to be in pairs in this case.
   (are [x y] (= x y)
     (conj [1] 2) [1 2]
     (conj [1 2] 3 4) [1 2 3 4]
     (conj '(2 1) 3 4) '(4 3 2 1)
     (conj #{2 1} 3 4) #{1 2 3 4}))
-
-;; Use (doc conj) for info
 
 
 (deftest how-to-count-stuff
@@ -40,6 +45,8 @@
 
 
 (deftest how-to-find-length-of-something
+  ;; First class functions are so cool. Put in the right function in let
+  ;; and all assertions should be correct.
   (let [f count]
     (are [x y] (= x y)
       (f '(1 2 3 3 1)) 5
@@ -51,20 +58,50 @@
 
 (deftest using-if
   (are [x y] (= x y)
-       (if (> 1 0)
-         true
-         false)
-       true
+    (if (> 1 0)
+      true
+      false)
+    true
 
-       (if (> 3 2 1)
-         true
-         false)
-       true
+    (if (> 3 2 1)
+      true
+      false)
+    true
 
-       (if (> 3 2 3 1)
-         true
-         false)
-       false))
+    (if (> 3 2 3 1)
+      true
+      false)
+    false
+
+    (if nil
+      "nil is truthy"
+      "nil is falsey"
+      ) "nil is falsey"
+
+    (if true
+      "true is truthy"
+      "true is falsey"
+      ) "true is truthy"
+
+    (if false
+      "false is truthy"
+      "false is falsey"
+      ) "false is falsey"
+
+    (if '(1)
+      "list is truthy"
+      "list is falsey"
+      ) "list is truthy"
+
+    (if '()
+      "empty list is truthy"
+      "empty list is falsey"
+      ) "empty list is truthy"
+
+    (if (Object.)
+      "Object is truthy"
+      "Object is falsey"
+      ) "Object is truthy"))
 
 
 (deftest dealing-with-lists
@@ -87,13 +124,12 @@
     (filter even? '(1 2 3 4 5)) '(2 4)))
 
 
-(deftest define-a-function-that-checks-length
-  (let [long? (fn [str len] (> (count str) len))]
+(deftest define-a-function-that-checks-string-longer-than
+  (let [longer-than? (fn [str len] (> (count str) len))]
     (are [x y] (= x y)
-         (long? "long string" 5) true
-         (long? "short" 5) false
-         (long? nil 2) false
-         )))
+         (longer-than? "long string" 5) true
+         (longer-than? "short" 5) false
+         (longer-than? nil 2) false)))
 
 
 (deftest use-map-to-double-all-numbers-in-a-sequence
