@@ -1,4 +1,4 @@
-package euler.problem1;
+package no.knowit.java_functional.euler_one;
 
 import fj.F;
 import static fj.data.List.range;

@@ -1,7 +1,8 @@
-package euler.problem1;
+package no.knowit.java_functional.euler_one;
 
 import static org.junit.Assert.*;
 
+import no.knowit.java_functional.euler_one.*;
 import org.junit.Test;
 
 public class Problem1Test {

@@ -1,4 +1,4 @@
-package euler.problem1;
+package no.knowit.java_functional.euler_one;
 
 import static ch.lambdaj.Lambda.filter;
 import static ch.lambdaj.Lambda.sum;

@@ -1,4 +1,4 @@
-package euler.problem1;
+package no.knowit.java_functional.euler_one;
 
 /**
  * If we list all the natural numbers below 10 that are multiples of 3 or 5, we

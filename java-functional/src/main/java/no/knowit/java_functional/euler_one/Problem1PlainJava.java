@@ -1,4 +1,4 @@
-package euler.problem1;
+package no.knowit.java_functional.euler_one;
 
 public class Problem1PlainJava implements Problem1 {
 
