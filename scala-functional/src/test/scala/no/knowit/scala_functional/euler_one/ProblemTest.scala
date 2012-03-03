@@ -1,4 +1,4 @@
-package no.knowit.scala_functional
+package no.knowit.scala_functional.euler_one
 
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
