@@ -1,4 +1,4 @@
-(ns fp.test.problem-one
+(ns no.knowit.clojure-functional.euler-one.problem-one
   (:use [clojure.test]))
 
 ; Running code
