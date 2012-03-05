@@ -12,6 +12,7 @@
     <name>Module project for functional workshop</name>
 
     <modules>
+        <module>common</module>
         <module>java-functional</module>
         <module>clojure-functional</module>
         <module>scala-functional</module>
