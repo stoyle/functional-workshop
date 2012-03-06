@@ -6,7 +6,7 @@
     <groupId>no.knowit</groupId>
     <artifactId>common</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <name>Java functional workshop</name>
+    <name>Common Java classes</name>
 
     <dependencies>
         <dependency>
