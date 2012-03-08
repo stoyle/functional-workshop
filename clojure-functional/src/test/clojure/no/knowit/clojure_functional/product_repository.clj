@@ -1,6 +1,6 @@
 (ns no.knowit.clojure_functional.product-repository
   (:use [clojure.test])
-  (:import [no.knowit.java_functional.product Product])
+  (:import no.knowit.java_functional.product.Product)
   (:import [org.joda.time LocalDate]))
 
 ; Production code
