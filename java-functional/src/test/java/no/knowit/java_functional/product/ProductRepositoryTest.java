@@ -6,10 +6,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -19,14 +16,12 @@ import fj.F2;
 
 public class ProductRepositoryTest {
 
-	private class ProductRepositoryImpl implements ProductRepository {
+	private static class ProductRepositoryImpl implements ProductRepository {
 
-		private List<Product> products = new LinkedList<Product>();
+		private final List<Product> products;
 
 		public ProductRepositoryImpl(Product... products) {
-			for (Product product : products) {
-				this.products.add(product);
-			}
+            this.products = Arrays.asList(products);
 		}
 
 		public Collection<Product> getAvailableProducts(LocalDate date) {
