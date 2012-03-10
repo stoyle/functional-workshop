@@ -43,6 +43,7 @@
   (is (= (euler-two 40 #(fib-range fib)) 44))
   (is (= (euler-two 4000000 #(fib-range fib-mem)) 4613732))
   (is (= (euler-two 4000000 #(fib-range fib-tail)) 4613732))
-  (is (= (euler-two 4000000 fib-lazy) 4613732)))
+  (is (= (euler-two 4000000 fib-lazy) 4613732))
+  (is (= (euler-two Long/MAX_VALUE fib-lazy) 3770056902373173214)))
 
 (run-tests)
