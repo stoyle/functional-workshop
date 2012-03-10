@@ -21,6 +21,16 @@ public class FibonacciTest {
         if (num < 1) return a;
         return fibFastRecur(num - 1, a + b, b);
     }
+
+    public static int fibIterative(long num) {
+        int prev1=0, prev2=1;
+        for(int i=0; i<num; i++) {
+            int savePrev1 = prev1;
+            prev1 = prev2;
+            prev2 = savePrev1 + prev2;
+        }
+        return prev1;
+    }
     
     interface Fib {
         long calc(long num);
@@ -38,8 +48,15 @@ public class FibonacciTest {
                 return fibFastRecursive(num);
             }
         };
+        Fib fibIterative = new Fib() {
+            public long calc(long num) {
+                return fibIterative(num);
+            }
+        };
         assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibSlow))));
         assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibFastRecursive))));
+        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibIterative))));
+        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibIterative))));
         // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibSlow))));
         // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibFastRecursive))));
 
