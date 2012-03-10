@@ -25,14 +25,8 @@
          (f b (+ a b)))))
     0N 1N))
 
-(defn unchunk [s]
-  (when (seq s)
-    (lazy-seq
-      (cons (first s)
-        (unchunk (next s))))))
-
 (defn fib-range [f]
-  (map f (unchunk (range))))
+  (map f (range)))
 
 (defn even-nums [coll]
   (filter even? coll))
@@ -46,7 +40,7 @@
       (even-nums (f)))))
 
 (deftest euler-two-fibonacci-sum
-  (is (= (euler-two 4000000 #(fib-range fib)) 4613732))
+  (is (= (euler-two 40 #(fib-range fib)) 44))
   (is (= (euler-two 4000000 #(fib-range fib-mem)) 4613732))
   (is (= (euler-two 4000000 #(fib-range fib-tail)) 4613732))
   (is (= (euler-two 4000000 fib-lazy) 4613732))
