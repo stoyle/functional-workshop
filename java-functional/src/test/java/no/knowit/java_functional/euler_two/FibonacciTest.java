@@ -36,6 +36,17 @@ public class FibonacciTest {
         long calc(long num);
     }
 
+    private long eulerTwo(long range, Fib fib) {
+        long res = 0, current = 0, counter = 0;
+        do{
+            current = fib.calc(counter++);
+            if (current % 2 == 0) {
+                res += current;
+            }
+        } while(current < range);
+        return res;
+    }
+
     @Test
     public void euler_two_fibonnaci_sum() throws Exception {
         Fib fibSlow = new Fib() {
@@ -62,14 +73,5 @@ public class FibonacciTest {
 
     }
 
-    private long eulerTwo(long range, Fib fib) {
-        long res = 0, current = 0, counter = 0;
-        do{
-            current = fib.calc(counter++);
-            if (current % 2 == 0) {
-                res += current;
-            }
-        } while(current < range);
-        return res;
-    }
+
 }
