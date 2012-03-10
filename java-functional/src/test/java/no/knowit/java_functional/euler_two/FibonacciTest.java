@@ -1,0 +1,58 @@
+package no.knowit.java_functional.euler_two;
+
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+public class FibonacciTest {
+
+    public static long fibSlow(long n) {
+        if (n <= 1) return n;
+        else return fibSlow(n - 1) + fibSlow(n - 2);
+    }
+
+    public static long fibFastRecursive(long num) {
+        return fibFastRecur(num, 1, 0);
+    }
+
+    private static long fibFastRecur(long num, long b, long a) {
+        if (num < 1) return a;
+        return fibFastRecur(num - 1, a + b, b);
+    }
+    
+    interface Fib {
+        long calc(long num);
+    }
+
+    @Test
+    public void euler_two_fibonnaci_sum() throws Exception {
+        Fib fibSlow = new Fib() {
+            public long calc(long num) {
+                return fibSlow(num);
+            }
+        };
+        Fib fibFastRecursive = new Fib() {
+            public long calc(long num) {
+                return fibFastRecursive(num);
+            }
+        };
+        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibSlow))));
+        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibFastRecursive))));
+        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibSlow))));
+        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibFastRecursive))));
+
+    }
+
+    private long eulerTwo(long range, Fib fib) {
+        long res = 0, current = 0, counter = 0;
+        do{
+            current = fib.calc(counter++);
+            if (current % 2 == 0) {
+                res += current;
+            }
+        } while(current < range);
+        return res;
+    }
+}
