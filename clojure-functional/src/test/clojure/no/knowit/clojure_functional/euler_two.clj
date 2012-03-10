@@ -15,8 +15,8 @@
 
 (defn fib-tail [num]
   (loop [num num, b 1N a 0N]
-    (if (< num 1) a
-      (recur (- num 1) (+ a b) b))))
+    (if (< num 2) a
+      (recur (dec num) (+ a b) b))))
 
 (defn fib-lazy []
   ((fn f [a b]
@@ -34,26 +34,15 @@
 (defn contents-less-than [limit coll]
   (take-while #(> limit %) coll))
 
-
-(defn in-side-out [limit f]
+(defn euler-two [limit f]
   (apply +
     (contents-less-than limit
       (even-nums (f)))))
 
-
-(defn composed [limit f]
-  ((comp #(apply + %)
-     #(contents-less-than limit %) even-nums f)))
-
-
-(defn arrowed [limit f]
-  (->> (f) even-nums (contents-less-than limit) (apply +)))
-
-
 (deftest euler-two-fibonacci-sum
-  (is (= (in-side-out 40 #(fib-range fib)) 44))
-  (is (= (in-side-out 4000000 #(fib-range fib-mem)) 4613732))
-  (is (= (in-side-out 4000000 #(fib-range fib-tail)) 4613732))
-  (is (= (in-side-out 4000000 fib-lazy) 4613732)))
+  (is (= (euler-two 40 #(fib-range fib)) 44))
+  (is (= (euler-two 4000000 #(fib-range fib-mem)) 4613732))
+  (is (= (euler-two 4000000 #(fib-range fib-tail)) 4613732))
+  (is (= (euler-two 4000000 fib-lazy) 4613732)))
 
 (run-tests)
