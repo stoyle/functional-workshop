@@ -1,11 +1,11 @@
 (ns no.knowit.clojure-functional.euler-two
   (:use [clojure.test]))
 
-(def fib
+(def fib-slow
   (fn [num]
     (if (< num 2) num
-      (+ (fib (- num 1))
-        (fib (- num 2))))))
+      (+ (fib-slow (- num 1))
+        (fib-slow (- num 2))))))
 
 (def fib-mem
   (memoize (fn [num]
@@ -40,7 +40,7 @@
       (even-nums (f)))))
 
 (deftest euler-two-fibonacci-sum
-  (is (= (euler-two 40 #(fib-range fib)) 44))
+  (is (= (euler-two 40 #(fib-range fib-slow)) 44))
   (is (= (euler-two 4000000 #(fib-range fib-mem)) 4613732))
   (is (= (euler-two 4000000 #(fib-range fib-tail)) 4613732))
   (is (= (euler-two 4000000 fib-lazy) 4613732))
