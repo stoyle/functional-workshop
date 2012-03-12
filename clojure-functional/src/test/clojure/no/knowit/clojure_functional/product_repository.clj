@@ -4,10 +4,14 @@
   (:import [org.joda.time LocalDate]))
 
 ; Production code
+
+; Use filter and provide your own function. Remember how you call a native Java method?
 (defn product-is-available [local-date product-coll]
   (filter
     #(.isAvailable %1 local-date) product-coll))
 
+; Write a recursive version not using filter. This is a bit advanced. Possible solutions include
+; loop recur, conj and if. Remember to always terminate the recurring, or you will get infinite recursion.
 (defn product-is-available-recur [local-date product-coll]
   (loop [cl product-coll result []]
     (if-let [h (first cl)]
