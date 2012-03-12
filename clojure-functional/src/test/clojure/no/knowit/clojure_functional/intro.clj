@@ -106,12 +106,14 @@
 
 (deftest dealing-with-lists
   (are [x y] (= x y)
+  ;; Should be able to use one simple function call to get result
        (first '(1 2 3 4))  1
        (last '(1 2 3 4 5)) 5
        (take 2 '(1 2 3 4)) '(1 2)))
 
 (deftest operating-on-lists
   (are [x y] (= x y)
+  ;; Here you should try to apply the correct function to get the expected result
        (apply + [1 2 3 4]) 10
        (apply - [4 3 2 1]) -2
        (apply * [1 2 3 4]) 24
@@ -120,23 +122,24 @@
 
 (deftest how-to-filter-out-the-stuff-you-want
   (are [x y] (= x y)
+  ;; Filter is cool. Can you write or use a cool function to get correct result?
     (filter odd? '(1 2 3 4 5)) '(1 3 5)
     (filter even? '(1 2 3 4 5)) '(2 4)))
 
+(deftest use-map-to-double-all-numbers-in-a-sequence
+  ;; Write a function in the let form that doubles its input
+  (let [double (fn [x] (* 2 x))]
+    (are [x y] (= x y)
+      (map double '(1 2 3)) '(2 4 6)
+      (map double '(5 10 15)) '(10 20 30))))
 
 (deftest define-a-function-that-checks-string-longer-than
+  ;; Write a function in the let form that that checks that the input String is longer than number input.
   (let [longer-than? (fn [str len] (> (count str) len))]
     (are [x y] (= x y)
          (longer-than? "long string" 5) true
          (longer-than? "short" 5) false
          (longer-than? nil 2) false)))
-
-
-(deftest use-map-to-double-all-numbers-in-a-sequence
-  (let [double (fn [i] (* 2 i))]
-    (are [x y] (= x y)
-         (map double '(1 2 3)) '(2 4 6)
-         (map double '(5 10 15)) '(10 20 30))))
 
 
 (run-tests)
