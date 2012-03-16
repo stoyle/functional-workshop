@@ -8,6 +8,7 @@ import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
 
+import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
@@ -21,12 +22,13 @@ public class ProductRepositoryTest {
 		private final List<Product> products;
 
 		public ProductRepositoryImpl(Product... products) {
-            this.products = Arrays.asList(products);
+			this.products = Collections.unmodifiableList(Arrays.asList(products));
 		}
 
 		public Collection<Product> getAvailableProducts(LocalDate date) {
 			// return getAvailableProductsIterator(date);
 			return getAvailableProductsForLoop(date);
+			// return getAvailableProductsRecursion(date);
 			// return getAvailableProductsLambaJ(date);
 			// return getAvailableProductsFJ(date);
 		}
@@ -53,6 +55,28 @@ public class ProductRepositoryTest {
 				}
 			}
 			return result;
+		}
+
+		private Collection<Product> getAvailableProductsRecursion(final LocalDate date) {
+			return getAvailableProductsRecursion(products, date, Collections.<Product> emptyList());
+		}
+
+		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
+				final List<Product> result) {
+			if (products.isEmpty()) {
+				return result;
+			}
+			Product product = products.get(0);
+			if (product.isAvailable(date)) {
+				return getAvailableProductsRecursion(products.subList(1, products.size()), date, cons(product, result));
+			} else {
+				return getAvailableProductsRecursion(products.subList(1, products.size()), date, result);
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private List<Product> cons(Product head, List<Product> tail) {
+			return ListUtils.union(Arrays.asList(head), tail);
 		}
 
 		/*
@@ -87,8 +111,7 @@ public class ProductRepositoryTest {
 	@Test
 	public void empty_list_when_no_products() {
 		ProductRepository productRepo = new ProductRepositoryImpl();
-		Collection<Product> available = productRepo
-				.getAvailableProducts(new LocalDate());
+		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
 		assertThat(available.isEmpty(), is(equalTo(true)));
 	}
 
@@ -107,11 +130,9 @@ public class ProductRepositoryTest {
 	public void empty_list_when_no_products_matching_date() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
-		Product discontinuedProduct = new Product("Discontinued product",
-				yesterday, yesterday);
+		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(
-				discontinuedProduct);
+		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct);
 
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		assertThat(available.isEmpty(), is(equalTo(true)));
@@ -121,14 +142,11 @@ public class ProductRepositoryTest {
 	public void find_discontinued_products() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
-		Product discontinuedProduct = new Product("Discontinued product",
-				yesterday, yesterday);
+		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(
-				discontinuedProduct);
+		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct);
 
-		Collection<Product> available = productRepo
-				.getAvailableProducts(yesterday);
+		Collection<Product> available = productRepo.getAvailableProducts(yesterday);
 		assertThat(available, hasItems(discontinuedProduct));
 	}
 
@@ -136,19 +154,15 @@ public class ProductRepositoryTest {
 	public void find_discontinued_then_new_products() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
-		Product discontinuedProduct = new Product("Discontinued product",
-				yesterday, yesterday);
+		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(
-				discontinuedProduct, newProduct);
+		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct, newProduct);
 
-		Collection<Product> availableYesterday = productRepo
-				.getAvailableProducts(yesterday);
+		Collection<Product> availableYesterday = productRepo.getAvailableProducts(yesterday);
 		assertThat(availableYesterday, hasItems(discontinuedProduct));
 
-		Collection<Product> availableToday = productRepo
-				.getAvailableProducts(today);
+		Collection<Product> availableToday = productRepo.getAvailableProducts(today);
 		assertThat(availableToday, hasItems(newProduct));
 	}
 }
