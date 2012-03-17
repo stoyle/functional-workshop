@@ -61,16 +61,16 @@ public class ProductRepositoryTest {
 			return getAvailableProductsRecursion(products, date, Collections.<Product> emptyList());
 		}
 
-		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
-				final List<Product> result) {
+		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,	final List<Product> result) {
 			if (products.isEmpty()) {
 				return result;
 			}
-			Product product = products.get(0);
-			if (product.isAvailable(date)) {
-				return getAvailableProductsRecursion(products.subList(1, products.size()), date, cons(product, result));
+			Product first = products.get(0);
+            List<Product> rest = products.subList(1, products.size());
+            if (first.isAvailable(date)) {
+				return getAvailableProductsRecursion(rest, date, cons(first, result));
 			} else {
-				return getAvailableProductsRecursion(products.subList(1, products.size()), date, result);
+				return getAvailableProductsRecursion(rest, date, result);
 			}
 		}
 
