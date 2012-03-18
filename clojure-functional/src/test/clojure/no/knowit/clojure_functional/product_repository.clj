@@ -5,7 +5,7 @@
 
 ; Production code
 
-; Use filter and provide your own function. Remember how you call a native Java method?
+;; Use filter and provide your own function. Remember how you call a native Java method?
 (defn product-is-available [local-date product-coll]
   (filter
     #(.isAvailable %1 local-date) product-coll))
@@ -24,16 +24,16 @@
 (def product-func product-is-available)
 
 ; Test code
-(deftest empty_list_when_no_products
+(deftest empty-list-when-no-products
   (is (= (product-func (LocalDate.) []))))
 
-(deftest product_available_when_matching_date
+(deftest product-available-when-matching-date
   (let [today (new LocalDate)
         product (new Product "Cool product" today today)]
     (is (not-empty (product-func today [product])))
     (is (.contains (product-func today [product]) product))))
 
-(deftest empty_list_when_no_products_matching_date
+(deftest empty-list-when-no-products-matching-date
   (let [today (new LocalDate)
         yesterday (.minusDays today 1)
         product (new Product "Cool product" yesterday yesterday)]
@@ -46,7 +46,7 @@
         product-two (new Product "Todays product" today today)]
     (is (= 1 (count (product-func today [product-one product-two]))))))
 
-(deftest find_discontinued_products
+(deftest find-discontinued-products
   (let [yesterday (.minusDays (new LocalDate) 1)
         product (new Product "Cool product" yesterday yesterday)]
     (is (not-empty (product-func yesterday [product])))))
