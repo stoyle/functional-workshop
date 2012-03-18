@@ -34,6 +34,7 @@
         result (doall (create-order-fn itineraries))
         stop (- (System/currentTimeMillis) start)]
     (is (= 5 (count result)))
+    (is (every? #(= (class %) Order) result) true)
     (is (< stop 400))))
 
 (run-tests)
