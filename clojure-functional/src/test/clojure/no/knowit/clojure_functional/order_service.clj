@@ -11,11 +11,11 @@
 
 ; Map over collection to create a new collection of new types.
 (defn create-order-coll [itinerary-coll]
-  (map create-order itinerary-coll))
+  itinerary-coll)
 
 ; How would you do that in parallel? First version is not fast enough!
 (defn create-order-coll-par [itinerary-coll]
-  (pmap create-order itinerary-coll))
+  itinerary-coll)
 
 
 (def create-order-fn create-order-coll-par)
@@ -28,6 +28,8 @@
     #(new TrainJourney from to departure-time
        (.plusHours departure-time 2)))))
 
+
+#_
 (deftest test-creating-orders
   (let [itineraries (create-itineraries)
         start (System/currentTimeMillis)
