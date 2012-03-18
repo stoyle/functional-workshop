@@ -12,35 +12,23 @@
 ;; Implement classical fibonnacci, the slow one!
 ;; f(x) = f(x - 1) + f(x - 2) where f(1) = 1 and f(0) = 0
 (def fib-slow
-  (fn [num]
-    (if (< num 2) num
-      (+ (fib-slow (- num 1))
-        (fib-slow (- num 2))))))
+  )
 
 ;; Create a memoized version of fib-slow
 (def fib-mem
-  (memoize (fn [num]
-             (if (< num 2) num
-               (+ (fib-mem (- num 1))
-                 (fib-mem (- num 2)))))))
+  )
 
 ;; Create a tail call optimized version of fiboncacci
 ;; f(n) = fr(n, 0, 1)
 ;; fr(n, b, a) = fr(n-1, a + b, b) where fr(1) = 1 and fr(0) = 0
 (defn fib-tail [num]
-  (loop [num num, b 1N a 0N]
-    (if (< num 2) a
-      (recur (dec num) (+ a b) b))))
+  )
 
 ;; Create a lazy sequence of fibonacci numbers.
 ;; Create a function which calls itself lazily (lazy-seq).
 ;; This should be the natural way to calculate fibonnaci.
 (defn fib-lazy []
-  ((fn f [a b]
-     (cons a
-       (lazy-seq
-         (f b (+ a b)))))
-    0N 1N))
+  )
 
 (defn f-range
   "Creates an infinite and lazy range of numbers calculated with f"
@@ -61,6 +49,7 @@
       (even-nums (f)))))
 
 
+#_
 (deftest euler-two-fibonacci-sum
   (is (= (euler-two 40 #(f-range fib-slow)) 44))
   (is (= (euler-two 4000000 #(f-range fib-mem)) 4613732))
