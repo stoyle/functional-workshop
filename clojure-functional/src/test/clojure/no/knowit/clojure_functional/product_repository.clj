@@ -37,7 +37,14 @@
   (let [today (new LocalDate)
         yesterday (.minusDays today 1)
         product (new Product "Cool product" yesterday yesterday)]
-    (is (empty (product-func today [product])))))
+    (is (empty? (product-func today [product])))))
+
+(deftest filter-one-products-matching-date
+  (let [today (new LocalDate)
+        yesterday (.minusDays today 1)
+        product-one (new Product "Cool product" yesterday yesterday)
+        product-two (new Product "Todays product" today today)]
+    (is (= 1 (count (product-func today [product-one product-two]))))))
 
 (deftest find_discontinued_products
   (let [yesterday (.minusDays (new LocalDate) 1)
