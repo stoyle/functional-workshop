@@ -1,7 +1,5 @@
 package no.knowit.java_functional.product;
 
-import static ch.lambdaj.Lambda.*;
-import static fj.data.List.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
@@ -12,10 +10,7 @@ import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-import fj.F;
-import fj.F2;
-
-public class ProductRepositoryTest {
+public class ProductRepositoryPlainJavaTest {
 
 	private static class ProductRepositoryImpl implements ProductRepository {
 
@@ -25,18 +20,30 @@ public class ProductRepositoryTest {
 			this.products = Collections.unmodifiableList(Arrays.asList(products));
 		}
 
+		/**
+		 * Exercise 1: Change this to call _getAvailableProductsImmutable_ and
+		 * implement that method so that the tests all pass.
+		 * 
+		 * The other two _getAvailableProducts..._ methods are provided for
+		 * illustration of common Java solutions.
+		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
 			// return getAvailableProductsIterator(date);
 			return getAvailableProductsForLoop(date);
-			// return getAvailableProductsRecursion(date);
-			// return getAvailableProductsLambaJ(date);
-			// return getAvailableProductsFJ(date);
+			// return getAvailableProductsImmutable(date);
 		}
 
-		/*
-		 * Plain Java
+		/**
+		 * Common Java pattern using Iterator to remove unwanted products before
+		 * returning the resulting collection.
+		 * 
+		 * This will fail because we are trying to remove elements from an
+		 * immutable collection.
+		 * 
+		 * Modifying collections should be avoided, as they may also be
+		 * referenced by others and we may this destroy the basis for other
+		 * computations.
 		 */
-
 		private Collection<Product> getAvailableProductsIterator(LocalDate date) {
 			for (Iterator<Product> i = products.iterator(); i.hasNext();) {
 				Product p = (Product) i.next();
@@ -47,6 +54,14 @@ public class ProductRepositoryTest {
 			return products;
 		}
 
+		/**
+		 * Common Java pattern creating a new collection to hold the available
+		 * products.
+		 * 
+		 * Improvement on the above, as this does not change the original
+		 * collection but instead creates a new. However it still creates and
+		 * works on a mutable list, even if only internally in the function.
+		 */
 		private Collection<Product> getAvailableProductsForLoop(LocalDate date) {
 			List<Product> result = new LinkedList<Product>();
 			for (Product product : products) {
@@ -57,11 +72,18 @@ public class ProductRepositoryTest {
 			return result;
 		}
 
-		private Collection<Product> getAvailableProductsRecursion(final LocalDate date) {
+		/**
+		 * Return the products that are available on the given date.
+		 * 
+		 * Implement using only immutable collections and final variables. You
+		 * are allowed to use the _cons_ method below.
+		 */
+		private Collection<Product> getAvailableProductsImmutable(final LocalDate date) {
 			return getAvailableProductsRecursion(products, date, Collections.<Product> emptyList());
 		}
 
-		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,	final List<Product> result) {
+		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
+				final List<Product> result) {
 			if (products.isEmpty()) {
 				return result;
 			}
@@ -76,39 +98,16 @@ public class ProductRepositoryTest {
 
 		@SuppressWarnings("unchecked")
 		private List<Product> cons(Product head, List<Product> tail) {
-			return ListUtils.union(Arrays.asList(head), tail);
+			return Collections.unmodifiableList(ListUtils.union(Arrays.asList(head), tail));
 		}
-
-		/*
-		 * LambdaJ
-		 */
-
-		private Collection<Product> getAvailableProductsLambaJ(LocalDate date) {
-			return filter(having(on(Product.class).isAvailable(date)), products);
-		}
-
-		/*
-		 * Functional Java
-		 */
-
-		private F2<Product, LocalDate, Boolean> isAvailableOnDate = new F2<Product, LocalDate, Boolean>() {
-			@Override
-			public Boolean f(Product p, LocalDate date) {
-				return p.isAvailable(date);
-			}
-		};
-
-		private Collection<Product> getAvailableProductsFJ(LocalDate date) {
-			F<Product, Boolean> f = isAvailableOnDate.flip().f(date);
-			return iterableList(products).filter(f).toCollection();
-		}
+		
 	}
-
+	
 	/*
 	 * Test code below here
 	 */
 
-	@Test
+	@Test()
 	public void empty_list_when_no_products() {
 		ProductRepository productRepo = new ProductRepositoryImpl();
 		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
