@@ -46,16 +46,6 @@ public class ProductRepositoryFunctionalJavaTest {
 			}
 		};
 
-		/**
-		 * LambdaJ solution, for reference.
-		 * 
-		 * @param date
-		 * @return
-		 */
-		private Collection<Product> getAvailableProductsLambaJ(LocalDate date) {
-			return filter(having(on(Product.class).isAvailable(date)), products);
-		}
-
 	}
 
 	/*
@@ -78,6 +68,23 @@ public class ProductRepositoryFunctionalJavaTest {
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		assertThat(available.size(), is(equalTo(1)));
 		assertThat(available, hasItems(coolProduct));
+	}
+
+	/*
+	 * This is expected to fail since it tries to remove an element from an
+	 * immutable list
+	 */
+	@Test(expected = java.lang.UnsupportedOperationException.class)
+	public void cannot_remove_elements_from_available_products() {
+		LocalDate today = new LocalDate();
+		Product coolProduct = new Product("Cool product", today, today);
+		ProductRepository productRepo = new ProductRepositoryImpl(coolProduct);
+
+		Collection<Product> available = productRepo.getAvailableProducts(today);
+		Iterator<Product> i = available.iterator();
+		i.next();
+		i.remove();
+		fail("Should not be allowed to remove elements from an immutable list");
 	}
 
 	@Test
@@ -119,4 +126,5 @@ public class ProductRepositoryFunctionalJavaTest {
 		Collection<Product> availableToday = productRepo.getAvailableProducts(today);
 		assertThat(availableToday, hasItems(newProduct));
 	}
+
 }
