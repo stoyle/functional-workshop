@@ -23,16 +23,15 @@ public class ProductRepositoryPlainJavaTest {
 		/**
 		 * Return the products that are available on the given date.
 		 * 
-		 * Exercise 1: Implement this method using only immutable collections
-		 * and final variables so that all tests pass. You are allowed to use
-		 * the _cons_ method below to add an element to a list, creating a new
-		 * immutable list.
+		 * Exercise 1: Implement this method using only immutable data
+		 * structures (unmodifiable collections, final variables/fields) so that
+		 * all tests pass. You are allowed to use the _cons_ method below to add
+		 * an element to a list, creating a new unmodifiable list.
 		 * 
 		 * The other two _getAvailableProducts..._ methods are provided for
 		 * illustration of common Java solutions.
 		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
-			// return getAvailableProductsForLoop(date);
 			List<Product> emptyList = Collections.emptyList();
 			return getAvailableProductsRecursion(products, date, emptyList);
 		}

@@ -28,13 +28,15 @@ public class OrderServicesTest implements OrderService {
 	 */
 	@Override
 	public Collection<Order> createOrderAlternatives(List<TrainJourney> itineraries) {
-		// return iterableList(itineraries).map(journeyToOrder).toCollection();
-		return createOrdersParMap(itineraries);
+		return iterableList(itineraries).map(journeyToOrder).toCollection();
 	}
 
-	private Collection<Order> createOrdersParMap(List<TrainJourney> itineraries) {
+	/**
+	 * Bonus: Transform train journeys to orders in parallel, to reduce running time.
+	 */
+	public Collection<Order> createOrderAlternativesParallel(List<TrainJourney> itineraries) {
 		Strategy<Order> s = Strategy.simpleThreadStrategy();
-		return s.parMap(journeyToOrder, iterableList(itineraries))._1().toCollection();
+		return s.parMap1(journeyToOrder, iterableList(itineraries)).toCollection();
 	}
 
 	private F<TrainJourney, Order> journeyToOrder = new F<TrainJourney, Order>() {
@@ -100,13 +102,14 @@ public class OrderServicesTest implements OrderService {
 		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
 
 		long startTime = System.currentTimeMillis();
-		Collection<Order> orderAlternatives = createOrderAlternatives(itineraries);
+		Collection<Order> orderAlternatives = createOrderAlternativesParallel(itineraries);
 		long endTime = System.currentTimeMillis();
 		int duration = (int) (endTime - startTime);
 
 		assertThat(orderAlternatives.size(), is(equalTo(5)));
+		assertThat("Order missing price", orderAlternatives, everyItem(hasPrice()));
 		assertThat("Create order alternatives too fast", duration, is(greaterThan(200)));
-		assertThat("Create order alternatives took too long", duration, is(lessThan(400)));
+		assertThat("Create order alternatives took too long", duration, is(lessThan(600)));
 	}
 
 	private LambdaJMatcher<Order> hasPrice() {
