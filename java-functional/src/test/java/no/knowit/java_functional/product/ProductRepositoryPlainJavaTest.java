@@ -21,16 +21,38 @@ public class ProductRepositoryPlainJavaTest {
 		}
 
 		/**
-		 * Exercise 1: Change this to call _getAvailableProductsImmutable_ and
-		 * implement that method so that the tests all pass.
+		 * Return the products that are available on the given date.
+		 * 
+		 * Exercise 1: Implement this method using only immutable data
+		 * structures (unmodifiable collections, final variables/fields) so that
+		 * all tests pass. You are allowed to use the _cons_ method below to add
+		 * an element to a list, creating a new unmodifiable list.
 		 * 
 		 * The other two _getAvailableProducts..._ methods are provided for
 		 * illustration of common Java solutions.
 		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
-			// return getAvailableProductsIterator(date);
-			return getAvailableProductsForLoop(date);
-			// return getAvailableProductsImmutable(date);
+			List<Product> emptyList = Collections.emptyList();
+			return getAvailableProductsRecursion(products, date, emptyList);
+		}
+
+		private Collection<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
+				final List<Product> result) {
+			if (products.isEmpty()) {
+				return result;
+			}
+			Product first = products.get(0);
+			List<Product> rest = products.subList(1, products.size());
+			if (first.isAvailable(date)) {
+				return getAvailableProductsRecursion(rest, date, cons(first, result));
+			} else {
+				return getAvailableProductsRecursion(rest, date, result);
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private List<Product> cons(Product head, List<Product> tail) {
+			return Collections.unmodifiableList(ListUtils.union(Arrays.asList(head), tail));
 		}
 
 		/**
@@ -44,7 +66,7 @@ public class ProductRepositoryPlainJavaTest {
 		 * referenced by others and we may this destroy the basis for other
 		 * computations.
 		 */
-		private Collection<Product> getAvailableProductsIterator(LocalDate date) {
+		public Collection<Product> getAvailableProductsIterator(LocalDate date) {
 			for (Iterator<Product> i = products.iterator(); i.hasNext();) {
 				Product p = (Product) i.next();
 				if (!p.isAvailable(date)) {
@@ -62,7 +84,7 @@ public class ProductRepositoryPlainJavaTest {
 		 * collection but instead creates a new. However it still creates and
 		 * works on a mutable list, even if only internally in the function.
 		 */
-		private Collection<Product> getAvailableProductsForLoop(LocalDate date) {
+		public Collection<Product> getAvailableProductsForLoop(LocalDate date) {
 			List<Product> result = new LinkedList<Product>();
 			for (Product product : products) {
 				if (product.isAvailable(date)) {
@@ -72,37 +94,8 @@ public class ProductRepositoryPlainJavaTest {
 			return result;
 		}
 
-		/**
-		 * Return the products that are available on the given date.
-		 * 
-		 * Implement using only immutable collections and final variables. You
-		 * are allowed to use the _cons_ method below.
-		 */
-		private Collection<Product> getAvailableProductsImmutable(final LocalDate date) {
-			return getAvailableProductsRecursion(products, date, Collections.<Product> emptyList());
-		}
-
-		private List<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
-				final List<Product> result) {
-			if (products.isEmpty()) {
-				return result;
-			}
-			Product first = products.get(0);
-            List<Product> rest = products.subList(1, products.size());
-            if (first.isAvailable(date)) {
-				return getAvailableProductsRecursion(rest, date, cons(first, result));
-			} else {
-				return getAvailableProductsRecursion(rest, date, result);
-			}
-		}
-
-		@SuppressWarnings("unchecked")
-		private List<Product> cons(Product head, List<Product> tail) {
-			return Collections.unmodifiableList(ListUtils.union(Arrays.asList(head), tail));
-		}
-		
 	}
-	
+
 	/*
 	 * Test code below here
 	 */
@@ -123,6 +116,23 @@ public class ProductRepositoryPlainJavaTest {
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		assertThat(available.size(), is(equalTo(1)));
 		assertThat(available, hasItems(coolProduct));
+	}
+
+	/*
+	 * This is expected to fail since it tries to remove an element from an
+	 * immutable list
+	 */
+	@Test(expected = java.lang.UnsupportedOperationException.class)
+	public void cannot_remove_elements_from_available_products() {
+		LocalDate today = new LocalDate();
+		Product coolProduct = new Product("Cool product", today, today);
+		ProductRepository productRepo = new ProductRepositoryImpl(coolProduct);
+
+		Collection<Product> available = productRepo.getAvailableProducts(today);
+		Iterator<Product> i = available.iterator();
+		i.next();
+		i.remove();
+		fail("Should not be allowed to remove elements from an immutable list");
 	}
 
 	@Test
@@ -164,4 +174,37 @@ public class ProductRepositoryPlainJavaTest {
 		Collection<Product> availableToday = productRepo.getAvailableProducts(today);
 		assertThat(availableToday, hasItems(newProduct));
 	}
+
+	/*
+	 * This is expected to fail since it tries to remove an element from an
+	 * immutable list
+	 */
+	@Test(expected = java.lang.UnsupportedOperationException.class)
+	public void empty_list_when_no_products_matching_date_iterator() {
+		LocalDate today = new LocalDate();
+		LocalDate yesterday = today.minusDays(1);
+		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
+
+		ProductRepositoryImpl productRepo = new ProductRepositoryImpl(discontinuedProduct);
+
+		Collection<Product> available = productRepo.getAvailableProductsIterator(today);
+		fail("Should not be allowed to remove elements from an immutable list");
+	}
+
+	@Test()
+	public void find_discontinued_then_new_products_for_loop() {
+		LocalDate today = new LocalDate();
+		LocalDate yesterday = today.minusDays(1);
+		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
+		Product newProduct = new Product("New product", today, null);
+
+		ProductRepositoryImpl productRepo = new ProductRepositoryImpl(discontinuedProduct, newProduct);
+
+		Collection<Product> availableYesterday = productRepo.getAvailableProductsForLoop(yesterday);
+		assertThat(availableYesterday, hasItems(discontinuedProduct));
+
+		Collection<Product> availableToday = productRepo.getAvailableProducts(today);
+		assertThat(availableToday, hasItems(newProduct));
+	}
+
 }
