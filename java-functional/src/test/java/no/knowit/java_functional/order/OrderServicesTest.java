@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,23 +28,15 @@ public class OrderServicesTest implements OrderService {
 	 */
 	@Override
 	public Collection<Order> createOrderAlternatives(List<TrainJourney> itineraries) {
-		return iterableList(itineraries).map(journeyToOrder).toCollection();
+		return Collections.emptyList();
 	}
 
 	/**
 	 * Bonus: Transform train journeys to orders in parallel, to reduce running time.
 	 */
 	public Collection<Order> createOrdersParallel(List<TrainJourney> itineraries) {
-		Strategy<Order> s = Strategy.simpleThreadStrategy();
-		return s.parMap1(journeyToOrder, iterableList(itineraries)).toCollection();
+		return createOrderAlternatives(itineraries);
 	}
-
-	private F<TrainJourney, Order> journeyToOrder = new F<TrainJourney, Order>() {
-		@Override
-		public Order f(TrainJourney journey) {
-			return createOrder(journey);
-		}
-	};
 
 	/**
 	 * Method to convert a single train journey to order, simulating

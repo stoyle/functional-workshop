@@ -1,6 +1,5 @@
 package no.knowit.java_functional.product;
 
-import static ch.lambdaj.Lambda.*;
 import static fj.data.List.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -30,21 +29,8 @@ public class ProductRepositoryFunctionalJavaTest {
 		 * create helper functions and classes.
 		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
-			F<Product, Boolean> f = isAvailableOnDate.flip().f(date);
-			return iterableList(products).filter(f).toCollection();
+			return Collections.emptyList();
 		}
-
-		/**
-		 * Implement a function which takes a product and date as input and
-		 * returns a boolean indicating whether or not the product is available
-		 * on the given date.
-		 */
-		private F2<Product, LocalDate, Boolean> isAvailableOnDate = new F2<Product, LocalDate, Boolean>() {
-			@Override
-			public Boolean f(Product p, LocalDate date) {
-				return p.isAvailable(date);
-			}
-		};
 
 	}
 

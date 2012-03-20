@@ -32,22 +32,7 @@ public class ProductRepositoryPlainJavaTest {
 		 * illustration of common Java solutions.
 		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
-			List<Product> emptyList = Collections.emptyList();
-			return getAvailableProductsRecursion(products, date, emptyList);
-		}
-
-		private Collection<Product> getAvailableProductsRecursion(final List<Product> products, final LocalDate date,
-				final List<Product> result) {
-			if (products.isEmpty()) {
-				return result;
-			}
-			Product first = products.get(0);
-			List<Product> rest = products.subList(1, products.size());
-			if (first.isAvailable(date)) {
-				return getAvailableProductsRecursion(rest, date, cons(first, result));
-			} else {
-				return getAvailableProductsRecursion(rest, date, result);
-			}
+			return Collections.emptyList();
 		}
 
 		@SuppressWarnings("unchecked")
