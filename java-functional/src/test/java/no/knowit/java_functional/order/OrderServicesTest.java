@@ -14,7 +14,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import ch.lambdaj.function.convert.Converter;
 import ch.lambdaj.function.matcher.LambdaJMatcher;
 
 import fj.F;
@@ -34,7 +33,7 @@ public class OrderServicesTest implements OrderService {
 	/**
 	 * Bonus: Transform train journeys to orders in parallel, to reduce running time.
 	 */
-	public Collection<Order> createOrderAlternativesParallel(List<TrainJourney> itineraries) {
+	public Collection<Order> createOrdersParallel(List<TrainJourney> itineraries) {
 		Strategy<Order> s = Strategy.simpleThreadStrategy();
 		return s.parMap1(journeyToOrder, iterableList(itineraries)).toCollection();
 	}
@@ -61,26 +60,12 @@ public class OrderServicesTest implements OrderService {
 	/**
 	 * Plain Java for-loop solution, for reference
 	 */
-	private Collection<Order> createOrdersLoop(List<TrainJourney> itineraries) {
+	public Collection<Order> createOrdersLoop(List<TrainJourney> itineraries) {
 		List<Order> alternatives = new LinkedList<Order>();
 		for (TrainJourney trainJourney : itineraries) {
 			alternatives.add(createOrder(trainJourney));
 		}
 		return alternatives;
-	}
-
-	/**
-	 * LambdaJ solution, for reference
-	 */
-	private Collection<Order> createOrdersLambaJMap(List<TrainJourney> itineraries) {
-		Converter<TrainJourney, Order> journeyToOrderConverter = new Converter<TrainJourney, Order>() {
-			@Override
-			public Order convert(TrainJourney journey) {
-				return createOrder(journey);
-			}
-		};
-		
-		return convert(itineraries, journeyToOrderConverter);
 	}
 
 	/*
@@ -98,11 +83,21 @@ public class OrderServicesTest implements OrderService {
 	}
 
 	@Test
+	public void convert_trainjourney_to_order_loop() {
+		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
+
+		Collection<Order> orderAlternatives = createOrdersLoop(itineraries);
+
+		assertThat(orderAlternatives.size(), is(equalTo(5)));
+		assertThat("Order missing price", orderAlternatives, everyItem(hasPrice()));
+	}
+
+	@Test
 	public void create_orders_within_timelimit() {
 		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
 
 		long startTime = System.currentTimeMillis();
-		Collection<Order> orderAlternatives = createOrderAlternativesParallel(itineraries);
+		Collection<Order> orderAlternatives = createOrdersParallel(itineraries);
 		long endTime = System.currentTimeMillis();
 		int duration = (int) (endTime - startTime);
 
