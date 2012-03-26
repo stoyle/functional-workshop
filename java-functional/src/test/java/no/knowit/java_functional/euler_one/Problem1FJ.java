@@ -7,7 +7,7 @@ import static fj.data.List.range;
 import static fj.function.Integers.sum;
 import static org.junit.Assert.assertEquals;
 
-public class Problem1FJ implements Problem1 {
+public class Problem1FJ {
 
 	@Test
 	public void testSumMultiplesOf3and5Below() {
@@ -25,7 +25,6 @@ public class Problem1FJ implements Problem1 {
 	 * Find all multiples of 3 or 5 in number range between 1 and _limit_, e.g.
 	 * using _filter_. Return the _sum_ of these numbers.
 	 */
-	@Override
 	public long sumMultiplesOf3and5Below(int limit) {
 		return sum(range(1, limit).filter(isMultipleOf3or5));
 	}

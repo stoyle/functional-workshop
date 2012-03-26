@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class Problem1PlainJava implements Problem1 {
+public class Problem1PlainJava {
 
 	@Test
 	public void testSumMultiplesOf3and5Below() {
@@ -18,7 +18,6 @@ public class Problem1PlainJava implements Problem1 {
 		// assertEquals("Wrong sum", 2333333316666668L, reallyLargeSum);
 	}
 
-	@Override
 	public long sumMultiplesOf3and5Below(int limit) {
 		long sum = 0;
 		for (int i = 0; i < limit; i++) {

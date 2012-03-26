@@ -78,12 +78,12 @@ public class FibonacciTest {
                 return fibIterative(num);
             }
         };
-        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibSlow))));
-        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibFastRecursive))));
-        assertThat(4613732L, is(equalTo(eulerTwo(4000000, fibIterative))));
-        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibIterative))));
-        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibSlow))));
-        // assertThat(3770056902373173214L, is(equalTo(eulerTwo(Long.MAX_VALUE, fibFastRecursive))));
+        assertThat(eulerTwo(4000000, fibSlow), is(equalTo(4613732L)));
+        assertThat(eulerTwo(4000000, fibFastRecursive), is(equalTo(4613732L)));
+        assertThat(eulerTwo(4000000, fibIterative), is(equalTo(4613732L)));
+        //assertThat(eulerTwo(Long.MAX_VALUE, fibIterative), is(equalTo(3770056902373173214L)));
+        //assertThat(eulerTwo(Long.MAX_VALUE, fibSlow), is(equalTo(3770056902373173214L)));
+        //assertThat(eulerTwo(Long.MAX_VALUE, fibFastRecursive), is(equalTo(3770056902373173214L)));
 
     }
 
