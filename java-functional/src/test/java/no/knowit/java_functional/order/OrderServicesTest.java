@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import ch.lambdaj.function.matcher.LambdaJMatcher;
@@ -66,6 +67,7 @@ public class OrderServicesTest implements OrderService {
 	 */
 
 	@Test
+    @Ignore
 	public void convert_trainjourney_to_order() {
 		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
 
@@ -76,6 +78,7 @@ public class OrderServicesTest implements OrderService {
 	}
 
 	@Test
+    @Ignore
 	public void convert_trainjourney_to_order_loop() {
 		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
 
@@ -86,6 +89,7 @@ public class OrderServicesTest implements OrderService {
 	}
 
 	@Test
+    @Ignore
 	public void create_orders_within_timelimit() {
 		List<TrainJourney> itineraries = createItineraries("OSLO S", "BERGEN", new DateTime());
 

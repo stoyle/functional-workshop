@@ -8,6 +8,7 @@ import java.util.*;
 
 import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ProductRepositoryPlainJavaTest {
@@ -85,7 +86,8 @@ public class ProductRepositoryPlainJavaTest {
 	 * Test code below here
 	 */
 
-	@Test()
+	@Test
+    @Ignore
 	public void empty_list_when_no_products() {
 		ProductRepository productRepo = new ProductRepositoryImpl();
 		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
@@ -93,6 +95,7 @@ public class ProductRepositoryPlainJavaTest {
 	}
 
 	@Test
+    @Ignore
 	public void product_available_when_matching_date() {
 		LocalDate today = new LocalDate();
 		Product coolProduct = new Product("Cool product", today, today);
@@ -108,6 +111,7 @@ public class ProductRepositoryPlainJavaTest {
 	 * immutable list
 	 */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
+    @Ignore
 	public void cannot_remove_elements_from_available_products() {
 		LocalDate today = new LocalDate();
 		Product coolProduct = new Product("Cool product", today, today);
@@ -121,6 +125,7 @@ public class ProductRepositoryPlainJavaTest {
 	}
 
 	@Test
+    @Ignore
 	public void empty_list_when_no_products_matching_date() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
@@ -133,6 +138,7 @@ public class ProductRepositoryPlainJavaTest {
 	}
 
 	@Test
+    @Ignore
 	public void find_discontinued_products() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
@@ -145,6 +151,7 @@ public class ProductRepositoryPlainJavaTest {
 	}
 
 	@Test
+    @Ignore
 	public void find_discontinued_then_new_products() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
@@ -165,6 +172,7 @@ public class ProductRepositoryPlainJavaTest {
 	 * immutable list
 	 */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
+    @Ignore
 	public void empty_list_when_no_products_matching_date_iterator() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
@@ -176,7 +184,8 @@ public class ProductRepositoryPlainJavaTest {
 		fail("Should not be allowed to remove elements from an immutable list");
 	}
 
-	@Test()
+	@Test
+    @Ignore
 	public void find_discontinued_then_new_products_for_loop() {
 		LocalDate today = new LocalDate();
 		LocalDate yesterday = today.minusDays(1);
