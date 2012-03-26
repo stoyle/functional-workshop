@@ -4,6 +4,7 @@
   (:import [no.knowit.java_functional.order TrainJourney Order])
   (:import [org.joda.time DateTime]))
 
+; Production code
 
 (defn create-order [train-journey]
   (do (Thread/sleep 200)
@@ -18,8 +19,9 @@
   itinerary-coll)
 
 
-(def create-order-fn create-order-coll-par)
+; Test code
 
+; Helper function to create itineraries
 (defn create-itineraries []
   (let [from "OSLO S"
         to "BERGEN"
@@ -29,14 +31,22 @@
        (.plusHours departure-time 2)))))
 
 
+; Generalise test expression, takes a create-order function
+(defn test-expr [create-order-fn]
+  (let [itineraries (create-itineraries)
+        result (doall (create-order-fn itineraries))]
+    (is (= 5 (count result)))
+    (is (every? #(= (class %) Order) result) true)))
+
 #_
 (deftest test-creating-orders
-  (let [itineraries (create-itineraries)
-        start (System/currentTimeMillis)
-        result (doall (create-order-fn itineraries))
+  (test-expr create-order-coll))
+
+#_
+(deftest test-creating-orders-within-time-limit
+  (let [start (System/currentTimeMillis)
+        _ (test-expr create-order-coll-par)
         stop (- (System/currentTimeMillis) start)]
-    (is (= 5 (count result)))
-    (is (every? #(= (class %) Order) result) true)
-    (is (< stop 400))))
+  (is (< stop 400))))
 
 (run-tests)
