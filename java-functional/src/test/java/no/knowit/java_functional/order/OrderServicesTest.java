@@ -21,13 +21,12 @@ import ch.lambdaj.function.matcher.LambdaJMatcher;
 import fj.F;
 import fj.control.parallel.Strategy;
 
-public class OrderServicesTest implements OrderService {
+public class OrderServicesTest {
 
 	/**
 	 * Exercise 3: Create orders from train journeys. Use the createOrder
 	 * method below to convert individual journeys, to simulate work.
 	 */
-	@Override
 	public Collection<Order> createOrderAlternatives(List<TrainJourney> itineraries) {
 		return Collections.emptyList();
 	}
