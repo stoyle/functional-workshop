@@ -19,23 +19,23 @@ class FibonacciTest {
   // Implement classical fibonnacci, the slow one!
   // f(x) = f(x - 1) + f(x - 2) where f(1) = 1 and f(0) = 0
   def fibSlow(n: Long): Long =
-    if (n <= 1) n else fibSlow(n - 1) + fibSlow(n - 2)
+    n
 
   // Create a tail call optimized version of fiboncacci
   // f(n) = fr(n, 0, 1)
   // fr(n, b, a) = fr(n-1, a + b, b) where fr(1) = 1 and fr(0) = 0
   def fibFastRecursive(num: Long) = {
-    @tailrec
+    // @tailrec
     def fib(num: Long, b: Long, a: Long): Long =
-      if (num < 1) a else fib(num - 1, a + b, b);
+      Long.MaxValue;
     fib(num, 1, 1)
   }
 
   // Create a lazy sequence of fibonacci numbers.
   // Create a function which calls itself lazily (Stream.cons).
   lazy val lazyFib: Stream[Long] = {
-    def f(a: Long,b: Long): Stream[Long] = Stream.cons(a, f(b,a+b))
-    f(0,1)
+    if (true) throw new Exception("Implement!")
+    Stream.continually(0)
   }
 
   // For illustration, the imperative fibonnacci, which is quite fast.
