@@ -103,13 +103,13 @@ public class ProductRepositoryPlainJavaTest {
 	@Test()
 	public void empty_list_when_no_products() {
 		ProductRepository productRepo = new ProductRepository();
-		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
+		Collection<Product> available = productRepo.getAvailableProducts(LocalDate.now());
 		assertThat(available.isEmpty(), is(equalTo(true)));
 	}
 
 	@Test
 	public void product_available_when_matching_date() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		Product coolProduct = new Product("Cool product", today, today);
 		ProductRepository productRepo = new ProductRepository(coolProduct);
 
@@ -124,7 +124,7 @@ public class ProductRepositoryPlainJavaTest {
 	 */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
 	public void cannot_remove_elements_from_available_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		Product coolProduct = new Product("Cool product", today, today);
 		ProductRepository productRepo = new ProductRepository(coolProduct);
 
@@ -137,7 +137,7 @@ public class ProductRepositoryPlainJavaTest {
 
 	@Test
 	public void empty_list_when_no_products_matching_date() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
@@ -149,7 +149,7 @@ public class ProductRepositoryPlainJavaTest {
 
 	@Test
 	public void find_discontinued_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
@@ -161,7 +161,7 @@ public class ProductRepositoryPlainJavaTest {
 
 	@Test
 	public void find_discontinued_then_new_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
@@ -181,7 +181,7 @@ public class ProductRepositoryPlainJavaTest {
 	 */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
 	public void empty_list_when_no_products_matching_date_iterator() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
@@ -193,7 +193,7 @@ public class ProductRepositoryPlainJavaTest {
 
 	@Test()
 	public void find_discontinued_then_new_products_for_loop() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
