@@ -14,6 +14,13 @@ import no.knowit.java_functional.product.Product
 class ProductRepositoryTest {
 
   class ProductRepository(val products: List[Product]) {
+    /**
+     * Return the products that are available on the given date.
+     *
+     * Exercise 1: Implement this method using only immutable data
+     * structures (immutable collections, vals) so that
+     * all tests pass.
+     */
     def getAvailableProducts(date: LocalDate): Seq[Product] = products filter { p => p.isAvailable(date) }
   }
 

@@ -15,8 +15,15 @@ import no.knowit.java_functional.order.TrainJourney
 @RunWith(classOf[JUnit4])
 class OrderServicesTest {
 
+  /**
+   * Exercise 3: Create orders from train journeys. Use the createOrder
+   * method below to convert individual journeys, to simulate work.
+   */
   def createOrderAlternatives(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries map { createOrder(_) }
 
+  /**
+   * Bonus: Transform train journeys to orders in parallel, to reduce running time.
+   */
   def createOrdersParallel(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries.par.map(createOrder(_)).seq
 
   private def createOrder(journey: TrainJourney): Order = {
