@@ -95,12 +95,12 @@ public class OrderServicesTest {
 		long startTime = System.currentTimeMillis();
 		Collection<Order> orderAlternatives = createOrdersParallel(itineraries);
 		long endTime = System.currentTimeMillis();
-		int duration = (int) (endTime - startTime);
+		long duration = endTime - startTime;
 
 		assertThat(orderAlternatives.size(), is(equalTo(5)));
 		assertThat("Order missing price", orderAlternatives, everyItem(hasPrice()));
-		assertThat("Create order alternatives too fast", duration, is(greaterThan(200)));
-		assertThat("Create order alternatives took too long", duration, is(lessThan(600)));
+		assertThat("Create order alternatives too fast", duration, is(greaterThan(200L)));
+		assertThat("Create order alternatives took too long", duration, is(lessThan(600L)));
 	}
 
 	private LambdaJMatcher<Order> hasPrice() {

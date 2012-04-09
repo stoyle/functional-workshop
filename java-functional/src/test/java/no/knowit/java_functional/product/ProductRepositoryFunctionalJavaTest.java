@@ -43,14 +43,14 @@ public class ProductRepositoryFunctionalJavaTest {
     @Ignore
 	public void empty_list_when_no_products() {
 		ProductRepository productRepo = new ProductRepository();
-		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
+		Collection<Product> available = productRepo.getAvailableProducts(LocalDate.now());
 		assertThat(available.isEmpty(), is(equalTo(true)));
 	}
 
 	@Test
     @Ignore
 	public void product_available_when_matching_date() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		Product coolProduct = new Product("Cool product", today, today);
 		ProductRepository productRepo = new ProductRepository(coolProduct);
 
@@ -66,7 +66,7 @@ public class ProductRepositoryFunctionalJavaTest {
 	@Test(expected = java.lang.UnsupportedOperationException.class)
     @Ignore
 	public void cannot_remove_elements_from_available_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		Product coolProduct = new Product("Cool product", today, today);
 		ProductRepository productRepo = new ProductRepository(coolProduct);
 
@@ -80,7 +80,7 @@ public class ProductRepositoryFunctionalJavaTest {
 	@Test
     @Ignore
 	public void empty_list_when_no_products_matching_date() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
@@ -93,7 +93,7 @@ public class ProductRepositoryFunctionalJavaTest {
 	@Test
     @Ignore
 	public void find_discontinued_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
@@ -106,7 +106,7 @@ public class ProductRepositoryFunctionalJavaTest {
 	@Test
     @Ignore
 	public void find_discontinued_then_new_products() {
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
