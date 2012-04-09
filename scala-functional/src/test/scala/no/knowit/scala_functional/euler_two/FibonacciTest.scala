@@ -1,4 +1,4 @@
-package euler_two
+package no.knowit.scala_functional.euler_two
 
 import annotation.tailrec
 import org.junit.Test
@@ -34,8 +34,8 @@ class FibonacciTest {
   // Create a lazy sequence of fibonacci numbers.
   // Create a function which calls itself lazily (Stream.cons).
   lazy val lazyFib: Stream[Long] = {
-    def f(a: Long,b: Long): Stream[Long] = Stream.cons(a, f(b,a+b))
-    f(0,1)
+    def f(a: Long, b: Long): Stream[Long] = Stream.cons(a, f(b, a + b))
+    f(0, 1)
   }
 
   // For illustration, the imperative fibonnacci, which is quite fast.
@@ -52,7 +52,7 @@ class FibonacciTest {
 
   def eulerTwo(range: Long, fibFun: Long => Long) = {
     var res, current, counter = 0L
-    while(current < range) {
+    while (current < range) {
       current = fibFun(counter)
       if (current % 2 == 0) {
         res += current
