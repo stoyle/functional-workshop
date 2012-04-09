@@ -1,10 +1,10 @@
 package euler_two
 
 import annotation.tailrec
-import org.junit.Test
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.is
 import org.junit.Assert.assertThat
+import org.junit.{Ignore, Test}
 
 
 // http://projecteuler.net/problem=2
@@ -64,6 +64,7 @@ class FibonacciTest {
 
 
   @Test
+  @Ignore
   def euler_two_fibonacci_sum {
     assertThat(eulerTwo(4000000, fibSlow), is(equalTo(4613732L)));
     assertThat(eulerTwo(4000000, fibFastRecursive), is(equalTo(4613732L)));
