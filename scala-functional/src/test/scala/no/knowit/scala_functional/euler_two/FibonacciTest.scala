@@ -1,4 +1,4 @@
-package euler_two
+package no.knowit.scala_functional.euler_two
 
 import annotation.tailrec
 import org.hamcrest.CoreMatchers.equalTo
@@ -52,7 +52,7 @@ class FibonacciTest {
 
   def eulerTwo(range: Long, fibFun: Long => Long) = {
     var res, current, counter = 0L
-    while(current < range) {
+    while (current < range) {
       current = fibFun(counter)
       if (current % 2 == 0) {
         res += current
