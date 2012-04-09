@@ -13,11 +13,11 @@ import com.google.common.collect.ImmutableList;
 
 public class ProductRepositoryPlainJavaTest {
 
-	private static class ProductRepositoryImpl implements ProductRepository {
+	private static class ProductRepository {
 
 		private final List<Product> products;
 
-		public ProductRepositoryImpl(Product... products) {
+		public ProductRepository(Product... products) {
 			this.products = ImmutableList.copyOf(products);
 		}
 
@@ -103,7 +103,7 @@ public class ProductRepositoryPlainJavaTest {
 
 	@Test()
 	public void empty_list_when_no_products() {
-		ProductRepository productRepo = new ProductRepositoryImpl();
+		ProductRepository productRepo = new ProductRepository();
 		Collection<Product> available = productRepo.getAvailableProducts(new LocalDate());
 		assertThat(available.isEmpty(), is(equalTo(true)));
 	}
@@ -112,7 +112,7 @@ public class ProductRepositoryPlainJavaTest {
 	public void product_available_when_matching_date() {
 		LocalDate today = new LocalDate();
 		Product coolProduct = new Product("Cool product", today, today);
-		ProductRepository productRepo = new ProductRepositoryImpl(coolProduct);
+		ProductRepository productRepo = new ProductRepository(coolProduct);
 
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		assertThat(available.size(), is(equalTo(1)));
@@ -127,7 +127,7 @@ public class ProductRepositoryPlainJavaTest {
 	public void cannot_remove_elements_from_available_products() {
 		LocalDate today = new LocalDate();
 		Product coolProduct = new Product("Cool product", today, today);
-		ProductRepository productRepo = new ProductRepositoryImpl(coolProduct);
+		ProductRepository productRepo = new ProductRepository(coolProduct);
 
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		Iterator<Product> i = available.iterator();
@@ -142,7 +142,7 @@ public class ProductRepositoryPlainJavaTest {
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct);
+		ProductRepository productRepo = new ProductRepository(discontinuedProduct);
 
 		Collection<Product> available = productRepo.getAvailableProducts(today);
 		assertThat(available.isEmpty(), is(equalTo(true)));
@@ -154,7 +154,7 @@ public class ProductRepositoryPlainJavaTest {
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct);
+		ProductRepository productRepo = new ProductRepository(discontinuedProduct);
 
 		Collection<Product> available = productRepo.getAvailableProducts(yesterday);
 		assertThat(available, hasItems(discontinuedProduct));
@@ -167,7 +167,7 @@ public class ProductRepositoryPlainJavaTest {
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
 
-		ProductRepository productRepo = new ProductRepositoryImpl(discontinuedProduct, newProduct);
+		ProductRepository productRepo = new ProductRepository(discontinuedProduct, newProduct);
 
 		Collection<Product> availableYesterday = productRepo.getAvailableProducts(yesterday);
 		assertThat(availableYesterday, hasItems(discontinuedProduct));
@@ -186,7 +186,7 @@ public class ProductRepositoryPlainJavaTest {
 		LocalDate yesterday = today.minusDays(1);
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 
-		ProductRepositoryImpl productRepo = new ProductRepositoryImpl(discontinuedProduct);
+		ProductRepository productRepo = new ProductRepository(discontinuedProduct);
 
 		Collection<Product> available = productRepo.getAvailableProductsIterator(today);
 		fail("Should not be allowed to remove elements from an immutable list");
@@ -199,7 +199,7 @@ public class ProductRepositoryPlainJavaTest {
 		Product discontinuedProduct = new Product("Discontinued product", yesterday, yesterday);
 		Product newProduct = new Product("New product", today, null);
 
-		ProductRepositoryImpl productRepo = new ProductRepositoryImpl(discontinuedProduct, newProduct);
+		ProductRepository productRepo = new ProductRepository(discontinuedProduct, newProduct);
 
 		Collection<Product> availableYesterday = productRepo.getAvailableProductsForLoop(yesterday);
 		assertThat(availableYesterday, hasItems(discontinuedProduct));
