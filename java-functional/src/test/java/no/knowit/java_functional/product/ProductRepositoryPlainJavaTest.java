@@ -51,7 +51,6 @@ public class ProductRepositoryPlainJavaTest {
 			}
 		}
 
-		@SuppressWarnings("unchecked")
 		private List<Product> cons(Product head, List<Product> tail) {
 			return ImmutableList.<Product>builder().add(head).addAll(tail).build();
 		}
