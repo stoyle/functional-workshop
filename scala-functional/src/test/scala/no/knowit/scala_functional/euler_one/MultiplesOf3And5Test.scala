@@ -10,19 +10,19 @@ class MultiplesOf3And5Test {
 
   @Test
   def find_sum_of_all_multiples_of_3_and_5_below_10 {
-    val res = (1 until 10).filter(i => i % 3 == 0 || i % 5 == 0).sum
+    val res = (1 until 10).sum // Hint needs a filter
     assertEquals("Wrong sum", 23, res)
   }
 
   @Test
   def find_sum_of_all_multiples_of_3_and_5_below_1000 {
-    val res = (1 until 1000).filter(i => i % 3 == 0 || i % 5 == 0).sum
+    val res = (1 until 1000).sum // Hint needs a filter
     assertEquals("Wrong sum", 233168L, res)
   }
 
   @Test
   def find_sum_of_all_multiples_of_3_and_5_below_10_000_000 {
-    val res = (1L until 10000000L).view.filter (i => i % 3 == 0 || i % 5 == 0).sum
+    val res = (1L until 10000000L).view.sum // Hint needs a filter. Using non-strict view here or it will use too much memory
     assertEquals("Wrong sum", 23333331666668L, res)
   }
 
