@@ -19,12 +19,12 @@ class OrderServicesTest {
    * Exercise 3: Create orders from train journeys. Use the createOrder
    * method below to convert individual journeys, to simulate work.
    */
-  def createOrderAlternatives(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries map { createOrder(_) }
+  def createOrderAlternatives(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries map createOrder
 
   /**
    * Bonus: Transform train journeys to orders in parallel, to reduce running time.
    */
-  def createOrdersParallel(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries.par.map(createOrder(_)).seq
+  def createOrdersParallel(itineraries: Seq[TrainJourney]): Seq[Order] = itineraries.par.map(createOrder).seq
 
   private def createOrder(journey: TrainJourney): Order = {
     try {
