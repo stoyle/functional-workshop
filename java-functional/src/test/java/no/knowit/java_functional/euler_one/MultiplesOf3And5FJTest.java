@@ -7,7 +7,7 @@ import static fj.data.List.range;
 import static fj.function.Integers.sum;
 import static org.junit.Assert.assertEquals;
 
-public class Problem1FJ {
+public class MultiplesOf3And5FJTest {
 
 	@Test
 	public void testSumMultiplesOf3and5Below() {

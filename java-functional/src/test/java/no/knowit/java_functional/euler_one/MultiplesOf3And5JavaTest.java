@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class Problem1PlainJava {
+public class MultiplesOf3And5JavaTest {
 
 	@Test
 	public void testSumMultiplesOf3and5Below() {
