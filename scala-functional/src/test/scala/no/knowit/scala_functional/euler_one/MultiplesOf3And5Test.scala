@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.Assert._
 
 @RunWith(classOf[JUnit4])
-class ProblemTest {
+class MultiplesOf3And5Test {
 
   @Test
   def find_sum_of_all_multiples_of_3_and_5_below_10 {

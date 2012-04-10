@@ -50,6 +50,7 @@ class FibonacciTest {
     prev2
   }
 
+  // This is the Euler two solution, but implemented imperatively with mutable data. Can you do better?
   def eulerTwo(range: Long, fibFun: Long => Long) = {
     var res, current, counter = 0L
     while (current < range) {
