@@ -57,7 +57,7 @@ class OrderServicesTest {
     assertThat(orderAlternatives.size, is(equalTo(5)));
     assertTrue("Order missing price", orderAlternatives forall { _.getPrice > 0.0 })
     assertTrue("Create order alternatives too fast", duration >= 200);
-    assertTrue("Create order alternatives took too long", duration < 600);
+    assertTrue("Create order alternatives took too long", duration < 800);
   }
 
   private def createItineraries(from: String, to: String, departureTime: DateTime): Seq[TrainJourney] =
