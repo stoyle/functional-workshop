@@ -1,18 +1,16 @@
 package no.knowit.java_functional.product;
 
-import static ch.lambdaj.Lambda.*;
-import static fj.data.List.*;
+import static fj.data.List.iterableList;
+import fj.F;
+import fj.F2;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
-
 import org.joda.time.LocalDate;
 import org.junit.Test;
-
-import fj.F;
-import fj.F2;
 
 public class ProductRepositoryFunctionalJavaTest {
 	
@@ -28,6 +26,8 @@ public class ProductRepositoryFunctionalJavaTest {
 		 * Exercise 2: Return the list of products that are available on the
 		 * given date. Implement this method using FunctionalJava. You may
 		 * create helper functions and classes.
+		 * 
+		 * Hint: Check Functional Java imports at the top of the source file.
 		 */
 		public Collection<Product> getAvailableProducts(LocalDate date) {
 			F<Product, Boolean> f = isAvailableOnDate.flip().f(date);

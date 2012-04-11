@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
-
 import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Test;
