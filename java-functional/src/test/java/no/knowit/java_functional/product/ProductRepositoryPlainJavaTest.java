@@ -5,12 +5,10 @@ import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
-
+import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.google.common.collect.ImmutableList;
 
 public class ProductRepositoryPlainJavaTest {
 
@@ -19,7 +17,7 @@ public class ProductRepositoryPlainJavaTest {
 		private final List<Product> products;
 
 		public ProductRepository(Product... products) {
-			this.products = ImmutableList.copyOf(products);
+			this.products = Collections.unmodifiableList(Arrays.asList(products));
 		}
 
 		/**
@@ -37,8 +35,9 @@ public class ProductRepositoryPlainJavaTest {
 			return Collections.emptyList();
 		}
 
+		@SuppressWarnings("unchecked")
 		private List<Product> cons(Product head, List<Product> tail) {
-			return ImmutableList.<Product>builder().add(head).addAll(tail).build();
+			return Collections.unmodifiableList(ListUtils.union(Arrays.asList(head), tail));
 		}
 
 		/**

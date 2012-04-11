@@ -1,31 +1,29 @@
 package no.knowit.java_functional.order;
 
+import static fj.data.List.iterableList;
+import fj.F;
+import fj.control.parallel.Strategy;
+
 import static ch.lambdaj.Lambda.*;
-import static fj.data.List.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.number.OrderingComparisons.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
+import java.util.*;
 import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import ch.lambdaj.function.matcher.LambdaJMatcher;
-
-import fj.F;
-import fj.control.parallel.Strategy;
 
 public class OrderServicesTest {
 
 	/**
 	 * Exercise 3: Create orders from train journeys. Use the createOrder
 	 * method below to convert individual journeys, to simulate work.
+	 * 
+	 * Hint: Check Functional Java imports at the top of the source file.
+	 * Solve this using Functional Java, not regular Java for loops etc.
 	 */
 	public Collection<Order> createOrderAlternatives(List<TrainJourney> itineraries) {
 		return Collections.emptyList();
