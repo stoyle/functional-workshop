@@ -1,0 +1,9 @@
+h1. Functional workshop
+
+This is the source code for a workshop created by Fredrik Vraalsen and Alf Kristian Støyle who work for Knowit AS.
+
+Its meaning is to learn Java devs what functional programming is all about. It is introductory, and it is meant to take about 4 hours to complete.
+
+We have currently not published the slides yet, but they will most likely be put out somewhere as well.
+
+Material is published under "Creative Commons Attribution 3.0 Unported License.":http://creativecommons.org/licenses/by/3.0/
