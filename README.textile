@@ -4,6 +4,6 @@ This is the source code for a workshop created by Fredrik Vraalsen and Alf Krist
 
 Its meaning is to learn Java devs what functional programming is all about. It is introductory, and it is meant to take about 4 hours to complete.
 
-We have currently not published the slides yet, but they will most likely be put out somewhere as well.
+Slides are available (as pdf's) under the slides folder. We use Keynote, if you would like the Keynote versions, please contact us directly.
 
 Material is published under "Creative Commons Attribution 3.0 Unported License.":http://creativecommons.org/licenses/by/3.0/

@@ -8,7 +8,7 @@
 #_
 (deftest very-basic-types
   (is (= 1 1))
-  ;; Lots of things are truthy, which is the simplest?
+  ;; Only one thing is really true...  
   (is (true? ___))
   ;; Now what is the concatenation of those Characters
   (is (= (str \a \b \c) ___))
@@ -57,6 +57,7 @@
 
 #_
 (deftest using-if
+  ;; Lots of things are truthy, i.e. is handled as true in e.g. if expressions.
   (are [x y] (= x y)
     (if (> 1 0)
       true
