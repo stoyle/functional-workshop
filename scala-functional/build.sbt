@@ -2,8 +2,14 @@ name := "hello"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.9.2"
 
-libraryDependencies += "junit" % "junit" % "4.8.2" % "test"
+resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
 
-libraryDependencies += "com.novocode" % "junit-interface" % "0.8" % "test->default"
+// disable using the Scala version in output paths and artifacts
+crossPaths := false
+
+// fork a new JVM for 'test:run', but not 'run'
+fork in Test := true
+
+externalPom()
