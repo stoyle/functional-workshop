@@ -5,6 +5,8 @@ import org.junit.Test
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.is
 import org.junit.Assert.assertThat
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 
 // http://projecteuler.net/problem=2
@@ -14,6 +16,7 @@ import org.junit.Assert.assertThat
 //
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
+@RunWith(classOf[JUnit4])
 class FibonacciTest {
 
   // Implement classical fibonnacci, the slow one!
