@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 //
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-public class FibonacciTest {
+public class Exercise_4_Fibonacci_Test {
 
     // Implement classical fibonnacci, the slow one!
     // f(x) = f(x - 1) + f(x - 2) where f(1) = 1 and f(0) = 0

@@ -16,7 +16,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import ch.lambdaj.function.matcher.LambdaJMatcher;
 
-public class OrderServicesTest {
+public class Exercise_3_Transform_Test {
 
 	/**
 	 * Exercise 3: Create orders from train journeys. Use the createOrder
