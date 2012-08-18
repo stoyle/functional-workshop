@@ -30,7 +30,7 @@ public class FibonacciTest {
     }
 
     private static long fibFastRecur(long num, long b, long a) {
-        return a;
+        return num;
     }
 
     // For illustration, the imperative fibonnacci, which is quite fast.
