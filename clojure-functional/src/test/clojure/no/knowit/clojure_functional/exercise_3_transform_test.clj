@@ -1,4 +1,4 @@
-(ns no.knowit.clojure-functional.order-service
+(ns no.knowit.clojure-functional.exercise-3-transform-test
   (:use [clojure.test])
   (:import no.knowit.java_functional.product.Product)
   (:import [no.knowit.java_functional.order TrainJourney Order])

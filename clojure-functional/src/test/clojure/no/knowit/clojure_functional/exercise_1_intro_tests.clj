@@ -1,4 +1,4 @@
-(ns no.knowit.clojure-functional.intro
+(ns no.knowit.clojure-functional.exercise-1-intro-tests
   (:use [clojure.test]))
 
 ; Placeholders do not touch.
