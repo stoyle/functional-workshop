@@ -1,4 +1,4 @@
-(ns no.knowit.clojure-functional.euler-two
+(ns no.knowit.clojure-functional.exercise-4-fibonacci-test
   (:use [clojure.test]))
 
 ;; http://projecteuler.net/problem=2

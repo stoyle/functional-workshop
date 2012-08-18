@@ -1,4 +1,4 @@
-(ns no.knowit.clojure-functional.product-repository
+(ns no.knowit.clojure-functional.exercise-2-filter-test
   (:use [clojure.test])
   (:import no.knowit.java_functional.product.Product)
   (:import [org.joda.time LocalDate]))
