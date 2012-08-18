@@ -9,7 +9,7 @@ import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-public class ProductRepositoryPlainJavaTest {
+public class Exercise_1_Pure_Java_Functional_Test {
 
 	private static class ProductRepository {
 

@@ -12,7 +12,7 @@ import java.util.*;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-public class ProductRepositoryFunctionalJavaTest {
+public class Exercise_2_Filter_Test {
 	
 	private static class ProductRepository {
 
