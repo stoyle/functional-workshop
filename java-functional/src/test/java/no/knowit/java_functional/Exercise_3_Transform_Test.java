@@ -1,4 +1,4 @@
-package no.knowit.java_functional.order;
+package no.knowit.java_functional;
 
 import static fj.data.List.iterableList;
 import fj.F;
@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
+
+import no.knowit.java_functional.order.Order;
+import no.knowit.java_functional.order.TrainJourney;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import ch.lambdaj.function.matcher.LambdaJMatcher;

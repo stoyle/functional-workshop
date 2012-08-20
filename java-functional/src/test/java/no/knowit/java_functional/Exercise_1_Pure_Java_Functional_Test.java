@@ -1,10 +1,12 @@
-package no.knowit.java_functional.product;
+package no.knowit.java_functional;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
+
+import no.knowit.java_functional.product.Product;
 import org.apache.commons.collections.ListUtils;
 import org.joda.time.LocalDate;
 import org.junit.Test;
