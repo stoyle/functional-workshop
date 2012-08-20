@@ -1,4 +1,4 @@
-package no.knowit.scala_functional.product
+package no.knowit.scala_functional
 
 import org.hamcrest.CoreMatchers._
 import org.joda.time.LocalDate
@@ -21,7 +21,9 @@ class ProductRepositoryTest {
      * structures (immutable collections, vals) so that
      * all tests pass.
      */
-    def getAvailableProducts(date: LocalDate): Seq[Product] = products filter { p => p.isAvailable(date) }
+    def getAvailableProducts(date: LocalDate): Seq[Product] = products filter {
+      p => p.isAvailable(date)
+    }
   }
 
   @Test

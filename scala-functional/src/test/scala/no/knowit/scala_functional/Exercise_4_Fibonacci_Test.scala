@@ -1,4 +1,4 @@
-package no.knowit.scala_functional.euler_two
+package no.knowit.scala_functional
 
 import annotation.tailrec
 import org.junit.Test
