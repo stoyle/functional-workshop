@@ -1,4 +1,4 @@
-package no.knowit.java_functional.euler_two;
+package no.knowit.java_functional;
 
 import org.junit.Ignore;
 import org.junit.Test;

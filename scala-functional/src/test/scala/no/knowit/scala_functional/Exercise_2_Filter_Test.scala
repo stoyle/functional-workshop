@@ -1,4 +1,4 @@
-package no.knowit.scala_functional.product
+package no.knowit.scala_functional
 
 import org.hamcrest.CoreMatchers._
 import org.joda.time.LocalDate
