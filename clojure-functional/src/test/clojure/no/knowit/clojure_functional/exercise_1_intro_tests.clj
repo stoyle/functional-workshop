@@ -110,6 +110,7 @@
   ;; Should be able to use one simple function call to get result
        (__ '(1 2 3 4))  1
        (__ '(1 2 3 4 5)) 5
+       ;; this can be solved with a function that takes an extra param and the list.
        (__ '(1 2 3 4)) '(1 2)))
 
 #_
