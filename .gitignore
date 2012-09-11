@@ -30,3 +30,4 @@ lib
 *.jar
 .cache
 classes/
+.DS_Store
