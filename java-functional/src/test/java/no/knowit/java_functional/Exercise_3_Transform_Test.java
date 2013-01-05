@@ -6,9 +6,8 @@ import fj.control.parallel.Strategy;
 
 import static ch.lambdaj.Lambda.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.number.OrderingComparisons.*;
+import static org.hamcrest.number.OrderingComparison.*;
 import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.*;
 
 import java.util.*;
 

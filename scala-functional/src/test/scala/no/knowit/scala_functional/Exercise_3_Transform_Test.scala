@@ -1,7 +1,7 @@
 package no.knowit.scala_functional
 
 import org.hamcrest.CoreMatchers._
-import org.hamcrest.number.OrderingComparisons._
+import org.hamcrest.number.OrderingComparison._
 import org.joda.time.DateTime
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
